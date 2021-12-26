@@ -8,5 +8,6 @@ pkgs.mkShell {
     pkgs.php74
     pkgs.php74Packages.composer
     pkgs.nginx
+    pkgs.mysql80
   ];
 }
