@@ -1,2 +1,5 @@
-var/
 magento2ce/
+var/log/*
+var/run/*
+var/mysql/data/*
+var/mysql/tmp/*
