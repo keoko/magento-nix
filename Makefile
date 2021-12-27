@@ -19,3 +19,7 @@ killall:
 	echo "killing mysql processes ..."
 	killall mysqld
 	echo "done"
+
+.PHONY: restart
+restart: killall start
+
