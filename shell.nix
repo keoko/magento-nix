@@ -15,5 +15,6 @@ pkgs.mkShell {
     pkgs.php74Packages.composer
     pkgs.nginx
     pkgs.mysql80
+    pkgs.elasticsearch7
   ];
 }

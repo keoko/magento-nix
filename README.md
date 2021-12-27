@@ -15,5 +15,6 @@ mysqld --defaults-file=my.cnf
 ```
 ### start
 ```
-nix-shell
+NIXPKGS_ALLOW_UNFREE=1 nix-shell
 ```
+The environment variable `NIXPKGS_ALLOW_UNFREE=1` is required by Nix to install elasticsearch7.
