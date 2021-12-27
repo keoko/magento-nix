@@ -1,3 +1,14 @@
+
+.PHONY: init-db
+init-db:
+	rm -rf var/mysql/data/* var/mysql/tmp/*
+	mysqld --initialize-insecure --console --socket=$$(pwd)/var/run/mysql.sock --tmpdir=$$(pwd)/var/mysql/tmp --datadir=./var/mysql/data --socket=$$(pwd)/var/mysql/mysql.sock
+	mysqld --socket=$$(pwd)/var/run/mysql.sock --tmpdir=$$(pwd)/var/mysql/tmp --datadir=./var/mysql/data --socket=$$(pwd)/var/mysql/mysql.sock
+	mysql -u root --password='' -P 3306 -e "CREATE DATABASE IF NOT EXISTS magento"
+
+.PHONY: init
+init: init-db
+
 .PHONY: install
 install:
 	./install.sh
