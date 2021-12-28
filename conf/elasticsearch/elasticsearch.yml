@@ -24,6 +24,7 @@
 #
 # Add custom attributes to the node:
 #
+ingest.geoip.downloader.enabled: false
 #node.attr.rack: r1
 #
 # ----------------------------------- Paths ------------------------------------
