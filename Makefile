@@ -23,18 +23,19 @@ clean:
 
 .PHONY: start
 start:
-	overmind start
+	OVERMIND_DAEMONIZE=1 overmind start
 
-.PHONY: killall
-killall:
-	echo "killing php-fpm processes ..."
-	kill -9 `ps -ef | grep php-fpm | grep -v grep | awk '{print $$2}'`
-	echo "killing nginx processes ..."
-	killall nginx
-	echo "killing mysql processes ..."
-	killall mysqld
-	echo "done"
+.PHONY: stop
+stop:
+	overmind kill ||:
+	@# kill all services as overmind may leave services running, see https://stackoverflow.com/questions/11871921/suppress-and-ignore-output-for-makefile
+	@# for the meaning of ||: see https://stackoverflow.com/questions/11871921/suppress-and-ignore-output-for-makefile
+	pkill php-fpm ||:
+	pkill nginx ||:
+	pkill redis-server ||:
+	pkill mysqld_safe ||:
+	pkill elasticsearch ||:
 
 .PHONY: restart
-restart: killall start
+restart: stop start
 
