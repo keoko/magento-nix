@@ -16,5 +16,6 @@ pkgs.mkShell {
     pkgs.nginx
     pkgs.mysql80
     pkgs.elasticsearch7
+    pkgs.redis
   ];
 }

@@ -1,7 +1,9 @@
 
-.PHONY: init-db
+.PHONY: init-folders
 init-folders:
-	mkdir -p var/{log,run,elasticsearch/data,mysql/{data,tmp}}
+	mkdir -p var/{log,run,elasticsearch/data,mysql/{data,tmp},redis/data}
+
+.PHONY: init-db
 init-db:
 	rm -rf var/mysql/data/* var/mysql/tmp/*
 	mysqld --initialize-insecure --console --socket=$$(pwd)/var/run/mysql.sock --tmpdir=$$(pwd)/var/mysql/tmp --datadir=./var/mysql/data --socket=$$(pwd)/var/mysql/mysql.sock

@@ -22,5 +22,8 @@ bin/magento setup:install \
    --db-host=127.0.0.1:3306 \
    --db-user=root \
    --db-password=root
-#   --elasticsearch-host=elastic
 
+# setup redis caches
+# bin/magento setup:config:set -n --page-cache=redis --page-cache-redis-server=redis --cache-backend-redis-db=3
+bin/magento setup:config:set -n --session-save=redis --session-save-redis-host=localhost --cache-backend-redis-db=0
+bin/magento setup:config:set -n --cache-backend=redis --cache-backend-redis-server=localhost --cache-backend-redis-db=1
