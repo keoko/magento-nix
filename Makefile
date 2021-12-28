@@ -1,5 +1,7 @@
 
 .PHONY: init-db
+init-folders:
+	mkdir -p var/{log,run,elasticsearch/data,mysql/{data,tmp}}
 init-db:
 	rm -rf var/mysql/data/* var/mysql/tmp/*
 	mysqld --initialize-insecure --console --socket=$$(pwd)/var/run/mysql.sock --tmpdir=$$(pwd)/var/mysql/tmp --datadir=./var/mysql/data --socket=$$(pwd)/var/mysql/mysql.sock
@@ -7,7 +9,7 @@ init-db:
 	mysql -u root --password='' -P 3306 -e "CREATE DATABASE IF NOT EXISTS magento"
 
 .PHONY: init
-init: init-db
+init: init-db init-folders
 
 .PHONY: install
 install:
