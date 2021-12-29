@@ -27,3 +27,7 @@ bin/magento setup:install \
 # bin/magento setup:config:set -n --page-cache=redis --page-cache-redis-server=redis --cache-backend-redis-db=3
 bin/magento setup:config:set -n --session-save=redis --session-save-redis-host=localhost --cache-backend-redis-db=0
 bin/magento setup:config:set -n --cache-backend=redis --cache-backend-redis-server=localhost --cache-backend-redis-db=1
+
+# setup varnish
+# ENABLE_VARNISH: uncomment the following line to enable varnish
+# bin/magento config:set --scope=default --scope-code=0 system/full_page_cache/caching_application 2

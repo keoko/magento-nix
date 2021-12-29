@@ -17,5 +17,6 @@ pkgs.mkShell {
     pkgs.mysql80
     pkgs.elasticsearch7
     pkgs.redis
+    pkgs.varnish60
   ];
 }
