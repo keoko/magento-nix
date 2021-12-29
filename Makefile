@@ -23,13 +23,18 @@ clean:
 
 .PHONY: start
 start:
-	OVERMIND_DAEMONIZE=1 overmind start
+	overmind start
+	@# overmind daemon does not terminate php-fpm processes, even with the hack
+	@# OVERMIND_DAEMONIZE=1 overmind start
 
 .PHONY: stop
 stop:
-	overmind kill ||:
-	@# kill all services as overmind may leave services running, see https://stackoverflow.com/questions/11871921/suppress-and-ignore-output-for-makefile
+	overmind kill
+
+.PHONY: killall
+killall:
 	@# for the meaning of ||: see https://stackoverflow.com/questions/11871921/suppress-and-ignore-output-for-makefile
+	overmind kill ||:
 	pkill php-fpm ||:
 	pkill nginx ||:
 	pkill redis-server ||:
