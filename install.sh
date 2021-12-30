@@ -25,8 +25,11 @@ bin/magento setup:install \
 
 # setup redis caches
 # bin/magento setup:config:set -n --page-cache=redis --page-cache-redis-server=redis --cache-backend-redis-db=3
-bin/magento setup:config:set -n --session-save=redis --session-save-redis-host=localhost --cache-backend-redis-db=0
-bin/magento setup:config:set -n --cache-backend=redis --cache-backend-redis-server=localhost --cache-backend-redis-db=1
+bin/magento setup:config:set -n --session-save=redis --session-save-redis-host=127.0.0.1 --cache-backend-redis-db=0
+bin/magento setup:config:set -n --cache-backend=redis --cache-backend-redis-server=127.0.0.1 --cache-backend-redis-db=1
+
+# setup rabbitmq
+bin/magento setup:config:set -n --amqp-host=127.0.0.1 --amqp-user=guest --amqp-password=guest
 
 # setup varnish
 # ENABLE_VARNISH: uncomment the following line to enable varnish

@@ -1,24 +1,5 @@
-.PHONY: init-folders
-init-folders:
-	mkdir -p var/{log,run,elasticsearch/data,mysql/{data,tmp},redis/data}
-
-.PHONY: init-db
-init-db:
-	rm -rf var/mysql/data/* var/mysql/tmp/*
-	mysqld --initialize-insecure --console --socket=$$(pwd)/var/run/mysql.sock --tmpdir=$$(pwd)/var/mysql/tmp --datadir=./var/mysql/data --socket=$$(pwd)/var/mysql/mysql.sock
-	mysqld --socket=$$(pwd)/var/run/mysql.sock --tmpdir=$$(pwd)/var/mysql/tmp --datadir=./var/mysql/data --socket=$$(pwd)/var/mysql/mysql.sock
-	mysql -u root --password='' -P 3306 -e "CREATE DATABASE IF NOT EXISTS magento"
-
 .PHONY: init
-init: init-db init-folders
-
-.PHONY: install
-install:
-	./install.sh
-
-.PHONY: clean
-clean:
-	rm -rf magento2ce
+init: init-folders init-db init-rabbitmq
 
 .PHONY: start
 start:
@@ -39,6 +20,29 @@ killall:
 	pkill mysqld_safe ||:
 	pkill elasticsearch ||:
 
+.PHONY: install
+install:
+	./install.sh
+
+.PHONY: clean
+clean:
+	rm -rf magento2ce
+
 .PHONY: restart
 restart: stop start
 
+
+.PHONY: init-folders
+init-folders:
+	mkdir -p var/{log,run,elasticsearch/data,mysql/{data,tmp},redis/data,rabbitmq/data}
+
+.PHONY: init-db
+init-db:
+	rm -rf var/mysql/data/* var/mysql/tmp/*
+	mysqld --initialize-insecure --console --socket=$$(pwd)/var/run/mysql.sock --tmpdir=$$(pwd)/var/mysql/tmp --datadir=./var/mysql/data --socket=$$(pwd)/var/mysql/mysql.sock
+	mysqld --socket=$$(pwd)/var/run/mysql.sock --tmpdir=$$(pwd)/var/mysql/tmp --datadir=./var/mysql/data --socket=$$(pwd)/var/mysql/mysql.sock
+	mysql -u root --password='' -P 3306 -e "CREATE DATABASE IF NOT EXISTS magento"
+
+.PHONY: init-rabbitmq
+init-rabbitmq:
+	rabbitmq-plugins enable rabbitmq_management

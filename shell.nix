@@ -3,7 +3,11 @@ let
   pkgs = import sources.nixpkgs {};
   php74' = pkgs.php74.buildEnv { 
     extensions = { enabled, all }: enabled ++ [ all.xsl ];
-    extraConfig = "memory_limit = -1"; };
+    extraConfig = "memory_limit = -1";
+  };
+  rabbitmq-server' = pkgs.rabbitmq-server.override {
+    elixir = pkgs.elixir_1_12;
+  };
 in
 pkgs.mkShell {
   buildInputs = [
@@ -17,5 +21,6 @@ pkgs.mkShell {
     pkgs.elasticsearch7
     pkgs.redis
     pkgs.varnish60
+    rabbitmq-server'
   ];
 }
