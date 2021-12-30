@@ -4,8 +4,6 @@ init: init-folders init-db init-rabbitmq
 .PHONY: start
 start:
 	hivemind
-	@# overmind daemon does not terminate php-fpm processes, even with the hack
-	@# OVERMIND_DAEMONIZE=1 overmind start
 
 .PHONY: stop
 stop: killall
@@ -13,12 +11,13 @@ stop: killall
 .PHONY: killall
 killall:
 	@# for the meaning of ||: see https://stackoverflow.com/questions/11871921/suppress-and-ignore-output-for-makefile
-	overmind kill ||:
 	pkill php-fpm ||:
 	pkill nginx ||:
 	pkill redis-server ||:
 	pkill mysqld_safe ||:
 	pkill elasticsearch ||:
+	pkill varnishd ||:
+	pkill rabbitmq-server ||:
 
 .PHONY: install
 install:
