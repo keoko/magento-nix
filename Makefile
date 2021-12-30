@@ -1,4 +1,3 @@
-
 .PHONY: init-folders
 init-folders:
 	mkdir -p var/{log,run,elasticsearch/data,mysql/{data,tmp},redis/data}
@@ -23,13 +22,12 @@ clean:
 
 .PHONY: start
 start:
-	overmind start
+	hivemind
 	@# overmind daemon does not terminate php-fpm processes, even with the hack
 	@# OVERMIND_DAEMONIZE=1 overmind start
 
 .PHONY: stop
-stop:
-	overmind kill
+stop: killall
 
 .PHONY: killall
 killall:

@@ -23,6 +23,3 @@ In order to debug Varnish issues, you could use `varnishlog` with the following 
 ```
 varnishlog -n $(pwd)/var/varnish/data/
 ```
-
-## Known issues
-### overmind starts as no-daemon mode because php-fpm processes are not terminated when overmind is stopped.

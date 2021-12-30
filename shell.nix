@@ -9,8 +9,7 @@ pkgs.mkShell {
   buildInputs = [
     pkgs.bash
     pkgs.vim
-    pkgs.tmux
-    pkgs.overmind
+    pkgs.hivemind
     php74'
     pkgs.php74Packages.composer
     pkgs.nginx
