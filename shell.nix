@@ -2,7 +2,7 @@ let
   sources = import ./nix/sources.nix;
   pkgs = import sources.nixpkgs {};
   php74' = pkgs.php74.buildEnv { 
-    extensions = { enabled, all }: enabled ++ [ all.xsl ];
+    extensions = { enabled, all }: enabled ++ [ all.xsl all.opcache all.xdebug ];
     extraConfig = "memory_limit = -1";
   };
   rabbitmq-server' = pkgs.rabbitmq-server.override {
