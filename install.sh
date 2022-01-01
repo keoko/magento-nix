@@ -9,6 +9,9 @@ git clone git@github.com:magento-commerce/magento2-sample-data.git --single-bran
 php magento2ee/dev/tools/build-ee.php --ce-source . --ee-source magento2ee
 php magento2ee/dev/tools/build-ee.php --ce-source . --ee-source magento2-sample-data
 
+# remove env.php file as it may exist from a previous installation
+rm app/etc/env.php
+
 composer install
 bin/magento setup:install \
    --cleanup-database \
@@ -28,8 +31,11 @@ bin/magento setup:config:set -n --session-save=redis --session-save-redis-host=1
 bin/magento setup:config:set -n --cache-backend=redis --cache-backend-redis-server=127.0.0.1 --cache-backend-redis-db=1
 
 # setup rabbitmq
-bin/magento setup:config:set -n --amqp-host=127.0.0.1 --amqp-user=guest --amqp-password=guest
+bin/magento setup:config:set -n --amqp-host=127.0.0.1 --amqp-port=${RABBITMQ_NODE_PORT} --amqp-user=guest --amqp-password=guest
 
 # setup varnish
 # ENABLE_VARNISH: uncomment the following line to enable varnish
 # bin/magento config:set --scope=default --scope-code=0 system/full_page_cache/caching_application 2
+
+# flush the cache
+bin/magento cache:flush
