@@ -13,7 +13,7 @@ http {
     server {
         listen ${NGINX_PORT};
         server_name mage.dev;
-        set $MAGE_ROOT ./magento2ce;
+        set $MAGE_ROOT ${APP_CODE};
         set $MAGE_DEBUG_SHOW_ARGS 0;
         error_log ./var/log/nginx_error.log warn;
         access_log ./var/log/nginx_access.log;
