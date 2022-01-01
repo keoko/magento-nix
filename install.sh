@@ -1,13 +1,8 @@
 #! /bin/bash
 
-git clone git@github.com:magento-commerce/magento2ce.git --single-branch --branch 2.4-develop --depth 1
+git clone git@github.com:magento/magento2.git --single-branch --branch 2.4-develop --depth 1
 
-cd magento2ce
-git clone git@github.com:magento-commerce/magento2ee.git --single-branch --branch 2.4-develop --depth 1
-git clone git@github.com:magento-commerce/magento2-sample-data.git --single-branch --branch 2.4-develop --depth 1
-
-php magento2ee/dev/tools/build-ee.php --ce-source . --ee-source magento2ee
-php magento2ee/dev/tools/build-ee.php --ce-source . --ee-source magento2-sample-data
+cd magento2
 
 # remove env.php file as it may exist from a previous installation
 rm app/etc/env.php
