@@ -8,6 +8,9 @@ let
   rabbitmq-server' = pkgs.rabbitmq-server.override {
     elixir = pkgs.elixir_1_12;
   };
+  composer' = pkgs.php74Packages.composer.override {
+    php = php74';
+  };
 in
 pkgs.mkShell {
   buildInputs = [
@@ -15,7 +18,7 @@ pkgs.mkShell {
     pkgs.vim
     pkgs.hivemind
     php74'
-    pkgs.php74Packages.composer
+    composer'
     pkgs.nginx
     pkgs.mysql80
     pkgs.elasticsearch7
