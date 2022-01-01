@@ -23,7 +23,7 @@ killall:
 	pkill rabbitmq-server ||:
 
 .PHONY: install
-install: install-rabbitmq-plugins install-db
+install: clean install-rabbitmq-plugins install-db
 	./install.sh
 
 .PHONY: clean
