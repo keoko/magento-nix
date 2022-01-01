@@ -1,2 +1,6 @@
 magento2ce/
 var/**
+conf/php/php.ini
+conf/nginx/nginx.conf
+conf/elasticsearch/jvm.options
+conf/elasticsearch/elasticsearch.yml

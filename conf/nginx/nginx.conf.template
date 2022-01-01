@@ -11,7 +11,7 @@ http {
         server   unix:./var/run/php-fpm.sock;
     }
     server {
-        listen 3000;
+        listen ${NGINX_PORT};
         server_name mage.dev;
         set $MAGE_ROOT ./magento2ce;
         set $MAGE_DEBUG_SHOW_ARGS 0;

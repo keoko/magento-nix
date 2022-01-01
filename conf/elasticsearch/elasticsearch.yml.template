@@ -31,11 +31,11 @@ ingest.geoip.downloader.enabled: false
 #
 # Path to directory where to store the data (separate multiple locations by comma):
 #
-path.data: /Users/cabre/Tmp/nix/mag2/var/elasticsearch/data
+path.data: ${ES_DATA}
 #
 # Path to log files:
 #
-path.logs: /Users/cabre/Tmp/nix/mag2/var/log/
+path.logs: ${LOG_PATH}
 #
 # ----------------------------------- Memory -----------------------------------
 #

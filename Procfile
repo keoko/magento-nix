@@ -1,8 +1,8 @@
 web: nginx -g 'daemon off;' -p . -c ${NGINX_CONF_FILE}
 php-fpm: php-fpm --php-ini ${PHP_INI_FILE} --nodaemonize --prefix . --fpm-config ${PHP_FPM_FILE}
-db: mysqld_safe --socket=${MYSQL_SOCKET} --tmpdir=${MYSQL_TMP} --datadir=${MYSQL_DATA}
+db: mysqld_safe --port ${MYSQL_PORT} --socket=${MYSQL_SOCKET} --tmpdir=${MYSQL_TMP} --datadir=${MYSQL_DATA}
 elastic: elasticsearch -p ${ES_PID}
-redis: redis-server --dir ${REDIS_DATA}
+redis: redis-server --port ${REDIS_PORT} --dir ${REDIS_DATA}
 rabbitmq: rabbitmq-server
 # ENABLE_VARNISH: uncomment the following line to enable varnish
-# varnish: varnishd -F -f ${VARNISH_CONFIG_FILE}  -n ${VARNISH_DATA}
+# varnish: varnishd -F -f ${VARNISH_CONFIG_FILE} -a 127.0.0.1:${VARNISH_PORT} -b 127.0.0.1:${NGINX_PORT}  -n ${VARNISH_DATA} 

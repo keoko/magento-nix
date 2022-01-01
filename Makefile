@@ -2,7 +2,7 @@ include .env
 export $(shell sed 's/=.*//' .env)
 
 .PHONY: init
-init: init-folders init-db
+init: init-folders init-conf-files init-db
 
 .PHONY: start
 start:
@@ -43,11 +43,19 @@ init-folders:
 	mkdir -p $(REDIS_DATA)
 	mkdir -p $(RABBITMQ_DATA)
 	mkdir -p $(VARNISH_DATA)
+	mkdir -p $(PHP_DATA)
+
+init-conf-files:
+	envsubst '$$NGINX_PORT' < conf/nginx/nginx.conf.template > conf/nginx/nginx.conf
+	envsubst '$$LOG_PATH $$RUN_PATH $$PHP_SESSION_PATH $$PHP_DATA' < conf/php/php.ini.template > conf/php/php.ini
+	envsubst '$$LOG_PATH $$ES_DATA' < conf/elasticsearch/elasticsearch.yml.template > conf/elasticsearch/elasticsearch.yml
+	envsubst '$$LOG_PATH' < conf/elasticsearch/jvm.options.template > conf/elasticsearch/jvm.options
+
 
 .PHONY: init-db
 init-db:
 	rm -rf $(MYSQL_TMP)/* $(MYSQL_DATA)/*
-	mysqld --initialize-insecure --console --socket=$(MYSQL_SOCKET) --tmpdir=$(MYSQL_TMP) --datadir=$(MYSQL_DATA)
+	mysqld --initialize-insecure --console --port=${MYSQL_PORT} --socket=$(MYSQL_SOCKET) --tmpdir=$(MYSQL_TMP) --datadir=$(MYSQL_DATA)
 
 .PHONY: install-rabbitmq-plugins
 install-rabbitmq-plugins:
