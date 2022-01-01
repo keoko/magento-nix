@@ -19,9 +19,8 @@ bin/magento setup:install \
    --admin-user=admin \
    --admin-password=123123q \
    --db-name=magento \
-   --db-host=127.0.0.1:3306 \
-   --db-user=root \
-   --db-password=root
+   --db-host=127.0.0.1:${MYSQL_PORT} \
+   --db-user=root
 
 # setup redis caches
 # bin/magento setup:config:set -n --page-cache=redis --page-cache-redis-server=redis --cache-backend-redis-db=3
