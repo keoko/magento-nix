@@ -44,9 +44,10 @@ init-folders:
 	mkdir -p $(RABBITMQ_DATA)
 	mkdir -p $(VARNISH_DATA)
 	mkdir -p $(PHP_DATA)
+	mkdir -p $(NGINX_DATA)
 
 init-conf-files:
-	envsubst '$$NGINX_PORT $$APP_CODE' < conf/nginx/nginx.conf.template > conf/nginx/nginx.conf
+	envsubst '$$NGINX_PORT $$APP_CODE $$NGINX_DATA $$NGINX_CONF_PATH $$LOG_PATH $$RUN_PATH' < conf/nginx/nginx.conf.template > conf/nginx/nginx.conf
 	envsubst '$$LOG_PATH $$RUN_PATH $$PHP_SESSION_PATH $$PHP_DATA' < conf/php/php.ini.template > conf/php/php.ini
 	envsubst '$$LOG_PATH $$ES_DATA' < conf/elasticsearch/elasticsearch.yml.template > conf/elasticsearch/elasticsearch.yml
 	envsubst '$$LOG_PATH' < conf/elasticsearch/jvm.options.template > conf/elasticsearch/jvm.options
