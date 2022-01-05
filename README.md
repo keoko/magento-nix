@@ -12,14 +12,15 @@ There are already several projects that allow you to install all the services to
 
 ## Packages installed
 | package       | version | enabled |
-| php           | 7.4.26  | yes     |
-| composer      | 2.1.4   | yes     |
-| mysql         | 8.0.26  | yes     |
-| redis         | 6.2.6   | yes     |
-| elasticsearch | 7.16.1  | yes     |
-| rabbitmq      | 3.9.8   | no      |
-| varnish       | 6.0.1   | no      |
-| XDebug        | 3.1.2   | no      |
+| ---           |     --: | :-:     |
+| php           |  7.4.26 | yes     |
+| composer      |   2.1.4 | yes     |
+| mysql         |  8.0.26 | yes     |
+| redis         |   6.2.6 | yes     |
+| elasticsearch |  7.16.1 | yes     |
+| rabbitmq      |   3.9.8 | no      |
+| varnish       |   6.0.1 | no      |
+| XDebug        |   3.1.2 | no      |
 
 ### Prerequisites
 - `Nix` package manager. Follow  [Install Nix](https://nixos.org/guides/install-nix.html)
