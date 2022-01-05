@@ -1,6 +1,6 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
-git clone git@github.com:magento/magento2.git --single-branch --branch 2.4-develop --depth 1
+git clone https://github.com/magento/magento2.git --single-branch --branch 2.4-develop --depth 1
 
 cd magento2
 
