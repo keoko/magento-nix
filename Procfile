@@ -5,4 +5,4 @@ elastic: elasticsearch -p ${ES_PID}
 redis: redis-server --port ${REDIS_PORT} --dir ${REDIS_DATA}
 rabbitmq: rabbitmq-server
 # ENABLE_VARNISH: uncomment the following line to enable varnish
-# varnish: varnishd -F -f ${VARNISH_CONFIG_FILE} -a 127.0.0.1:${VARNISH_PORT} -b 127.0.0.1:${NGINX_PORT}  -n ${VARNISH_DATA} 
+# varnish: varnishd -F -f ${VARNISH_CONFIG_FILE} -a 127.0.0.1:${VARNISH_PORT} -n ${VARNISH_DATA}
