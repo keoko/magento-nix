@@ -26,7 +26,8 @@ bin/magento setup:config:set -n --session-save=redis --session-save-redis-host=1
 bin/magento setup:config:set -n --cache-backend=redis --cache-backend-redis-server=127.0.0.1 --cache-backend-redis-db=1
 
 # setup rabbitmq
-bin/magento setup:config:set -n --amqp-host=127.0.0.1 --amqp-port=${RABBITMQ_NODE_PORT} --amqp-user=guest --amqp-password=guest
+# ENABLE_RABBITMQ: uncomment the following line to enable rabbitmq
+#bin/magento setup:config:set -n --amqp-host=127.0.0.1 --amqp-port=${RABBITMQ_NODE_PORT} --amqp-user=guest --amqp-password=guest
 
 # setup varnish
 # ENABLE_VARNISH: uncomment the following line to enable varnish
