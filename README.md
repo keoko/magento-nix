@@ -8,12 +8,23 @@ There are already several projects that allow you to install all the services to
 ## Goals
 - fast Magento2 development.
 - reproducible development environment.
-- compatibility with MacOS and Linux. Maybe Windows depending on the status of Nix on Windows.
+- compatibility with MacOS, Linux and Windows. It has been tested in MacOS (Monterey), Linux (MX-21), [Windows10 WSL2 (Alpine)](doc/windows10_installation.md).
+
+## Packages installed
+| package       | version | enabled |
+| php           | 7.4.26  | yes     |
+| composer      | 2.1.4   | yes     |
+| mysql         | 8.0.26  | yes     |
+| redis         | 6.2.6   | yes     |
+| elasticsearch | 7.16.1  | yes     |
+| rabbitmq      | 3.9.8   | no      |
+| varnish       | 6.0.1   | no      |
+| XDebug        | 3.1.2   | no      |
 
 ### Prerequisites
 - `Nix` package manager. Follow  [Install Nix](https://nixos.org/guides/install-nix.html)
 
-## Run
+## Install
 - Start nix shell. The environment variable `NIXPKGS_ALLOW_UNFREE=1` is required by Nix to install elasticsearch7. Note that first time you run `nix-shell` it will download all the nix packages, so it will take some time. Be patient!
 ```
 NIXPKGS_ALLOW_UNFREE=1 nix-shell
@@ -37,6 +48,16 @@ username: admin
 password: 123123q
 ```
 
+## Run
+Once installed, you will only need to start the nix shell and run `make start`.
+```
+NIXPKGS_ALLOW_UNFREE=1 nix-shell
+make start
+```
+
+## Stop
+Just cancel the execution with Ctrl-C in the nix shell where you run `make start`.
+
 ## Alternatives
 - [valet-plus](https://github.com/weprovide/valet-plus)
 - [docker-magento](https://github.com/markshust/docker-magento)
@@ -55,3 +76,7 @@ In order to debug Varnish issues, you could use `varnishlog` with the following 
 ```
 varnishlog -n $(pwd)/var/varnish/data/
 ```
+
+## Next steps
+- install mailhog
+- be able to run MFTF tests
