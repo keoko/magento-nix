@@ -11,16 +11,18 @@ There are already several projects that allow you to install all the services to
 - compatibility with MacOS, Linux and Windows. It has been tested in MacOS (Monterey), Linux (MX-21), [Windows10 WSL2 (Alpine)](doc/windows10_installation.md).
 
 ## Packages installed
-| package       | version | enabled |
-| ---           |     --: | :-:     |
-| php           |  7.4.26 | yes     |
-| composer      |   2.1.4 | yes     |
-| mysql         |  8.0.26 | yes     |
-| redis         |   6.2.6 | yes     |
-| elasticsearch |  7.16.1 | yes     |
-| rabbitmq      |   3.9.8 | no      |
-| varnish       |   6.0.1 | no      |
-| XDebug        |   3.1.2 | no      |
+All services are configured to use their default ports, but in case you want to change them you can edit [.env](./.env) file.
+| package       | version | enabled | ports (default) | links                                                                  |
+| ---           |     --: | :-:     |             --- | ---                                                                    |
+| php           |  7.4.26 | yes     |            3000 | http://localhost:3000 (store) <br/>http://localhost:3000/admin (admin) |
+| composer      |   2.1.4 | yes     |               - | -                                                                      |
+| mysql         |  8.0.26 | yes     |            3306 | mysql --host=127.0.0.1 --user=root -p                                  |
+| redis         |   6.2.6 | yes     |            6379 | redis-cli                                                              |
+| elasticsearch |  7.16.1 | yes     |            9200 | http://localhost:9200                                                  |
+| mailhog       |   1.0.1 | yes     |            8025 | http://localhost:8025                                                  |
+| rabbitmq      |   3.9.8 | no      |            5672 | http://localhost:15672 (management UI)                                 |
+| varnish       |   6.0.1 | no      |            3001 | http://localhost:3001                                                  |
+| XDebug        |   3.1.2 | no      |               - | -                                                                      |
 
 ### Prerequisites
 - `Nix` package manager. Follow  [Install Nix](https://nixos.org/guides/install-nix.html)

@@ -29,5 +29,6 @@ pkgs.mkShell {
     pkgs.redis
     pkgs.varnish60
     rabbitmq-server'
+    pkgs.mailhog
   ];
 }

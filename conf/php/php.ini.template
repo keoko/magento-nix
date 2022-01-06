@@ -63,7 +63,7 @@ opcache.validate_root = On
 opcache.validate_timestamps = On
 
 ; Mail hog
-sendmail_path = "/usr/local/bin/mhsendmail --smtp-addr=mail:1025"
+sendmail_path = "MailHog sendmail"
 
 ; XDebug
 ; XDEBUG_ENABLE uncomment the following lines

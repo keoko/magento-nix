@@ -7,3 +7,4 @@ redis: redis-server --port ${REDIS_PORT} --dir ${REDIS_DATA}
 # rabbitmq: rabbitmq-server
 # ENABLE_VARNISH: uncomment the following line to enable varnish
 # varnish: varnishd -F -f ${VARNISH_CONFIG_FILE} -a 127.0.0.1:${VARNISH_PORT} -n ${VARNISH_DATA}
+mail: MailHog
