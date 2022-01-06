@@ -17,7 +17,7 @@ pkgs.mkShell {
     pkgs.bash
     # gettext required to install envsubst
     pkgs.gettext
-    $ inetutils required to install telnet and others
+    # inetutils required to install telnet and others
     pkgs.inetutils
     pkgs.vim
     pkgs.hivemind
