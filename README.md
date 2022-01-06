@@ -29,6 +29,14 @@ There are already several projects that allow you to install all the services to
 - Start nix shell. The environment variable `NIXPKGS_ALLOW_UNFREE=1` is required by Nix to install elasticsearch7. Note that first time you run `nix-shell` it will download all the nix packages, so it will take some time. Be patient!
 ```
 NIXPKGS_ALLOW_UNFREE=1 nix-shell
+``**
+---
+**NOTE**
+The only commands you must run as root are the ones below to create the folder `/var/log/nginx`. I've not found out how to avoid it.
+---
+```
+sudo mkdir -p /var/log/nginx;
+sudo chown `whoami` /var/log/nginx;
 ```
 - Initialize the project. It will mainly create temporary folders, configuration files and the database.
 ```
