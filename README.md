@@ -89,5 +89,5 @@ varnishlog -n $(pwd)/var/varnish/data/
 ```
 
 ## Next steps
-- install mailhog
 - be able to run MFTF tests
+- certificates
