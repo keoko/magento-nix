@@ -1,6 +1,6 @@
 # Magento Development Environment with nix
 
-This is a proof of concept to check if it is feasible to build a development environment for Magento2 based on Nix.
+This is a proof of concept to check if it is feasible to build a development environment for Magento2 based on [Nix](https://nixos.org/).
 
 ## Why
 There are already several projects that allow you to install all the services to develop Magento2 applications. The main two strategies are Docker and valet-plus, and each of them have their pros and cons. My main concern with Docker is performance, and with valet-plus is that it is only available for MacOS. 
@@ -29,15 +29,15 @@ There are already several projects that allow you to install all the services to
 - Start nix shell. The environment variable `NIXPKGS_ALLOW_UNFREE=1` is required by Nix to install elasticsearch7. Note that first time you run `nix-shell` it will download all the nix packages, so it will take some time. Be patient!
 ```
 NIXPKGS_ALLOW_UNFREE=1 nix-shell
-``**
+```
 ---
 **NOTE**
 The only commands you must run as root are the ones below to create the folder `/var/log/nginx`. I've not found out how to avoid it.
----
 ```
 sudo mkdir -p /var/log/nginx;
 sudo chown `whoami` /var/log/nginx;
 ```
+---
 - Initialize the project. It will mainly create temporary folders, configuration files and the database.
 ```
 make init
