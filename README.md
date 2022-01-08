@@ -29,18 +29,15 @@ All services are configured to use their default ports, but in case you want to 
 - `Nix` package manager. Follow  [Install Nix](https://nixos.org/guides/install-nix.html)
 
 ## Install
+- Clone this repository.
+```
+git clone https://github.com/keoko/magento-nix.git
+```
 - Start nix shell. The environment variable `NIXPKGS_ALLOW_UNFREE=1` is required by Nix to install elasticsearch7. Note that first time you run `nix-shell` it will download all the nix packages, so it will take some time. Be patient!
 ```bash
+cd magento-nix
 NIXPKGS_ALLOW_UNFREE=1 nix-shell
 ```
----
-**NOTE**
-The only commands you must run as root are the ones below to create the folder `/var/log/nginx`. I've not found out how to avoid it.
-```bash
-sudo mkdir -p /var/log/nginx;
-sudo chown `whoami` /var/log/nginx;
-```
----
 - Initialize the project. It will mainly create temporary folders, configuration files and the database.
 ```bash
 make init
@@ -49,7 +46,7 @@ make init
 ```bash
 make start
 ```
-- In another terminal, open a new nix-shell and install magento code. It will install magento2 CE and sample data by default. If you want to use an existing folder you can skip this step and change APP_PATH variable of `.env` file  to point to the folder with magento2 code.
+- In another terminal, open a new nix-shell and install magento code. It will install magento2 CE. If you want to use an existing folder you can skip this step and change APP_PATH variable of `.env` file  to point to the existing folder.
 ```bash
 NIXPKGS_ALLOW_UNFREE=1 nix-shell
 make install
@@ -84,6 +81,7 @@ make start-selenium
 Open another nix-shell and run the MFTF test you want. For instance, to run `AdminLoginSuccessfulTest` you should run the following:
 ```bash
 NIXPKGS_ALLOW_UNFREE=1 nix-shell
+make prepare-mftf-tests
 MFTF_TEST=AdminLoginSuccessfulTest make run-mftf
 ```
 ### RabbitMQ (Optional for Magento2)
