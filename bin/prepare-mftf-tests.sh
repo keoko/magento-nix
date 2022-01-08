@@ -8,4 +8,5 @@ bin/magento config:set web/seo/use_rewrites 1
 bin/magento cache:clean config full_page
 vendor/bin/mftf build:project
 cp dev/tests/acceptance/.htaccess.sample dev/tests/acceptance/.htaccess
+sed -i "s,MAGENTO_BASE_URL=http://devdocs.magento.com/,MAGENTO_BASE_URL=http://localhost:${NGINX_PORT}/," dev/tests/acceptance/.env
 vendor/bin/mftf generate:tests
