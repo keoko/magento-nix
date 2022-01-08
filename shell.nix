@@ -30,5 +30,7 @@ pkgs.mkShell {
     pkgs.varnish60
     rabbitmq-server'
     pkgs.mailhog
+    pkgs.selenium-server-standalone
+    pkgs.chromedriver
   ];
 }

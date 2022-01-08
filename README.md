@@ -12,17 +12,18 @@ There are already several projects that allow you to install all the services to
 
 ## Packages installed
 All services are configured to use their default ports, but in case you want to change them you can edit [.env](./.env) file.
-| package       | version | enabled | ports (default) | links                                                                  |
-| ---           |     --: | :-:     |             --- | ---                                                                    |
-| php           |  7.4.26 | yes     |            3000 | http://localhost:3000 (store) <br/>http://localhost:3000/admin (admin) |
-| composer      |   2.1.4 | yes     |               - | -                                                                      |
-| mysql         |  8.0.26 | yes     |            3306 | `mysql --host=127.0.0.1 --port=3306 --user=root --password=''`         |
-| redis         |   6.2.6 | yes     |            6379 | `redis-cli`                                                            |
-| elasticsearch |  7.16.1 | yes     |            9200 | http://localhost:9200                                                  |
-| mailhog       |   1.0.1 | yes     |            8025 | http://localhost:8025                                                  |
-| rabbitmq      |   3.9.8 | no      |            5672 | http://localhost:15672 (management UI)                                 |
-| varnish       |   6.0.1 | no      |            3001 | http://localhost:3001                                                  |
-| XDebug        |   3.1.2 | no      |               - | -                                                                      |
+| package       |  version | enabled | ports (default) | links                                                                  |
+| ---           |      --: | :-:     |             --- | ---                                                                    |
+| php           |   7.4.26 | yes     |            3000 | http://localhost:3000 (store) <br/>http://localhost:3000/admin (admin) |
+| composer      |    2.1.4 | yes     |               - | -                                                                      |
+| mysql         |   8.0.26 | yes     |            3306 | `mysql --host=127.0.0.1 --port=3306 --user=root --password=''`         |
+| redis         |    6.2.6 | yes     |            6379 | `redis-cli`                                                            |
+| elasticsearch |   7.16.1 | yes     |            9200 | http://localhost:9200                                                  |
+| mailhog       |    1.0.1 | yes     |            8025 | http://localhost:8025                                                  |
+| rabbitmq      |    3.9.8 | no      |            5672 | http://localhost:15672 (management UI)                                 |
+| varnish       |    6.0.1 | no      |            3001 | http://localhost:3001                                                  |
+| xdebug        |    3.1.2 | no      |            9003 | -                                                                      |
+| selenium      | 3.141.59 | no      |            4444 | -                                                                      |
 
 ### Prerequisites
 - `Nix` package manager. Follow  [Install Nix](https://nixos.org/guides/install-nix.html)
@@ -74,7 +75,19 @@ Just cancel the execution with Ctrl-C in the nix shell where you run `make start
 - [docker-magento](https://github.com/markshust/docker-magento)
 
 ## Notes
+### MFTF Tests
+Start selenium in another nix shell with the following command:
+```
+NIXPKGS_ALLOW_UNFREE=1 nix-shell
+make start-selenium
+```
+Open another nix-shell and run the MFTF test you want. For instance, to run `AdminLoginSuccessfulTest` you should run the following:
+```bash
+NIXPKGS_ALLOW_UNFREE=1 nix-shell
+MFTF_TEST=AdminLoginSuccessfulTest make run-mftf
+```
 ### RabbitMQ (Optional for Magento2)
+RabbitMQ  is disabled by default, as this project is aimed for Magento development. In case you want to enable it, look for the word RABBITMQ_VARNISH and follow the instructions appended after it.
 You can access RabbitMQ's management UI through `http://localhost:15672` with credentials:
 ```
 username: guest
@@ -89,5 +102,5 @@ varnishlog -n $(pwd)/var/varnish/data/
 ```
 
 ## Next steps
-- be able to run MFTF tests
 - certificates
+- Magento2 integration tests

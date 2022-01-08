@@ -21,6 +21,7 @@ killall:
 	pkill elasticsearch ||:
 	pkill varnishd ||:
 	pkill rabbitmq-server ||:
+	pkill epmd ||:
 
 .PHONY: install
 install: clean install-rabbitmq-plugins install-db
@@ -46,12 +47,12 @@ init-folders:
 	mkdir -p $(PHP_DATA)
 	mkdir -p $(NGINX_DATA)
 
+.PHONY: init-conf-files
 init-conf-files:
 	envsubst '$$NGINX_PORT $$APP_CODE $$NGINX_DATA $$NGINX_CONF_PATH $$LOG_PATH $$RUN_PATH' < conf/nginx/nginx.conf.template > conf/nginx/nginx.conf
 	envsubst '$$LOG_PATH $$RUN_PATH $$PHP_SESSION_PATH $$PHP_DATA' < conf/php/php.ini.template > conf/php/php.ini
 	envsubst '$$LOG_PATH $$ES_DATA' < conf/elasticsearch/elasticsearch.yml.template > conf/elasticsearch/elasticsearch.yml
 	envsubst '$$LOG_PATH' < conf/elasticsearch/jvm.options.template > conf/elasticsearch/jvm.options
-
 
 .PHONY: init-db
 init-db:
@@ -65,3 +66,30 @@ install-rabbitmq-plugins:
 .PHONY: install-db
 install-db:
 	mysql -u root --password='' --socket=$(MYSQL_SOCKET) -P $(MYSQL_PORT) -e "CREATE DATABASE IF NOT EXISTS magento"
+
+.PHONY: start-selenium
+start-selenium:
+	java -jar $$(dirname $$(dirname $$(which selenium-server)))/share/lib/selenium-server-standalone-3.141.59/selenium-server-standalone-3.141.59.jar
+
+.PHONY: prepare-mftf-tests
+prepare-mftf-tests:
+	./bin/prepare-mftf-tests.sh
+
+.PHONY: run-mftf
+run-mftf:
+	cd ${APP_CODE} && ./vendor/bin/mftf run:test ${MFTF_TEST}
+
+.PHONY: seek-and-destroy
+seek-and-destroy:
+	rm -rf $(LOG_PATH)
+	rm -rf $(RUN_PATH)
+	rm -rf $(MYSQL_DATA)
+	rm -rf $(MYSQL_TMP)
+	rm -rf $(ES_DATA)
+	rm -rf $(REDIS_DATA)
+	rm -rf $(RABBITMQ_DATA)
+	rm -rf $(VARNISH_DATA)
+	rm -rf $(PHP_DATA)
+	rm -rf $(NGINX_DATA)
+	rm -rf ${APP_CODE}/var/*
+	rm -rf ${APP_CODE}/generated/code/*
