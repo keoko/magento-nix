@@ -1,6 +1,6 @@
-# Example configuration:
-pid ${RUN_PATH}/nginx.pid;
 error_log stderr;
+daemon off;
+pid ${RUN_PATH}/nginx.pid;
 
 events {}
 

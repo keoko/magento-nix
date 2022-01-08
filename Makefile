@@ -65,7 +65,7 @@ install-rabbitmq-plugins:
 
 .PHONY: install-db
 install-db:
-	mysql -u root --password='' --socket=$(MYSQL_SOCKET) -P $(MYSQL_PORT) -e "CREATE DATABASE IF NOT EXISTS magento"
+	mysql --user=root --password='' --host='127.0.0.1' --port=$(MYSQL_PORT) -e "CREATE DATABASE IF NOT EXISTS magento"
 
 .PHONY: start-selenium
 start-selenium:
