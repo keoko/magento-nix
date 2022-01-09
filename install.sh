@@ -5,7 +5,7 @@ git clone https://github.com/magento/magento2.git --single-branch --branch 2.4.3
 cd magento2
 
 # remove env.php file as it may exist from a previous installation
-rm app/etc/env.php
+rm app/etc/env.php app/etc/config.php
 
 composer install
 bin/magento setup:install \
