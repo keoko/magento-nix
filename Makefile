@@ -71,6 +71,14 @@ install-db:
 start-selenium:
 	java -jar $$(dirname $$(dirname $$(which selenium-server)))/share/lib/selenium-server-standalone-3.141.59/selenium-server-standalone-3.141.59.jar
 
+.PHONY: prepare-integration-tests
+prepare-integration-tests:
+	./bin/prepare-integration-tests.sh
+
+.PHONY: run-integration-tests
+run-integration-tests:
+	cd ${APP_CODE}/dev/tests/integration && ../../../vendor/bin/phpunit
+
 .PHONY: prepare-mftf-tests
 prepare-mftf-tests:
 	./bin/prepare-mftf-tests.sh
