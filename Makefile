@@ -50,7 +50,7 @@ init-folders:
 .PHONY: init-conf-files
 init-conf-files:
 	envsubst '$$NGINX_PORT $$APP_CODE $$NGINX_DATA $$NGINX_CONF_PATH $$LOG_PATH $$RUN_PATH' < conf/nginx/nginx.conf.template > conf/nginx/nginx.conf
-	envsubst '$$LOG_PATH $$RUN_PATH $$PHP_SESSION_PATH $$PHP_DATA' < conf/php/php.ini.template > conf/php/php.ini
+	envsubst '$$PHP_CONF_PATH $$LOG_PATH $$RUN_PATH $$PHP_SESSION_PATH $$PHP_DATA' < conf/php/php.ini.template > conf/php/php.ini
 	envsubst '$$LOG_PATH $$ES_DATA' < conf/elasticsearch/elasticsearch.yml.template > conf/elasticsearch/elasticsearch.yml
 	envsubst '$$LOG_PATH' < conf/elasticsearch/jvm.options.template > conf/elasticsearch/jvm.options
 
@@ -85,7 +85,7 @@ prepare-mftf-tests:
 
 .PHONY: run-mftf
 run-mftf:
-	cd ${APP_CODE} && ./vendor/bin/mftf run:test ${MFTF_TEST}
+	cd ${APP_CODE} && ./vendor/bin/mftf run:test -r ${MFTF_TEST}
 
 .PHONY: seek-and-destroy
 seek-and-destroy:

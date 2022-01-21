@@ -1,13 +1,29 @@
 ; copied from https://raw.githubusercontent.com/duhon/magento-docker/a21905100006d75b515bdd928bc82a1cb094858c/etc/php/php.ini
+
+[curl]
+curl.cainfo = "${PHP_CONF_PATH}/cacert.pem"
+
+[openssl]
+openssl.cafile = "${PHP_CONF_PATH}/cacert.pem"
+
+
+; Magento2 recommendations
+; https://devdocs.magento.com/guides/v2.4/install-gde/prereq/php-settings.html
+memory_limit = 4G
+pcre.jit = 0
+realpath_cache_size = 10M
+realpath_cache_ttl = 7200
+
+; https://devdocs.magento.com/guides/v2.4/install-gde/prereq/nginx.html
+max_execution_time = 1800
+zlib.output_compression = On
+
 ; Basic configuration override
 expose_php = off
-memory_limit = 2047M
 post_max_size = 1000M
 upload_max_filesize = 1000M
 date.timezone = UTC
-max_execution_time = 18000
 session.auto_start = off
-zlib.output_compression = off
 suhosin.session.cryptua = off
 always_populate_raw_post_data = -1
 session.save_path = ${PHP_SESSION_PATH}
@@ -24,17 +40,17 @@ opcache.error_log = ${LOG_PATH}/opcache-error.log
 report_memleaks = On
 track_errors = Off
 
-; A bit of performance tuning
-realpath_cache_size = 4096K
-realpath_cache_ttl = 10
-
+; https://devdocs.magento.com/guides/v2.3/performance-best-practices/software.html
 ; OpCache tuning
-opcache.blacklist_filename = ""
-opcache.consistency_checks = 0
-opcache.dups_fix = Off
 opcache.enable = On
 opcache.enable_cli = On
 opcache.enable_file_override = On
+opcache.memory_consumption = 2048
+opcache.max_accelerated_files = 60000
+opcache.consistency_checks = 0
+opcache.validate_timestamps = On
+opcache.blacklist_filename = ""
+opcache.dups_fix = Off
 opcache.file_cache = ${PHP_DATA}/php-file-cache
 opcache.file_cache_consistency_checks = 1
 opcache.file_cache_only = Off
@@ -45,10 +61,8 @@ opcache.inherited_hack = On
 opcache.interned_strings_buffer = 8
 opcache.lockfile_path = ${RUN_PATH}
 opcache.log_verbosity_level = 1
-opcache.max_accelerated_files = 100000
 opcache.max_file_size = 0
 opcache.max_wasted_percentage = 5
-opcache.memory_consumption = 256
 opcache.opt_debug_level = 0
 opcache.optimization_level = 0x7FFFBFFF
 opcache.preferred_memory_model = ""
@@ -60,7 +74,7 @@ opcache.save_comments = 1
 opcache.use_cwd = On
 opcache.validate_permission = Off
 opcache.validate_root = On
-opcache.validate_timestamps = On
+
 
 ; Mail hog
 sendmail_path = "MailHog sendmail"
